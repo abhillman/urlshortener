@@ -30,8 +30,7 @@ def run_task():
 
   if create_lockfile(options.lockfile):
     # Remove failure counter
-    if options.threshold and options.counter_file\
-    and os.path.exists(options.counter_file):
+    if options.threshold and options.counter_file and os.path.exists(options.counter_file):
       os.remove(options.counter_file)
 
     # Run the command
