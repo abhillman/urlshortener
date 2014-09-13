@@ -38,9 +38,9 @@ class ShortURLManager(models.Manager):
 
 class ShortURL(models.Model):
     objects = ShortURLManager()
-    time_created = models.DateTimeField()
+    time_created = models.DateTimeField(default=timezone.now())
     word = models.OneToOneField(DictionaryWord, primary_key=True)
     original_url = models.TextField()
-
+    
     def __str__(self):
        return u'%s (%s)' % (self.word.word, self.original_url)

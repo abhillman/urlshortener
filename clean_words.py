@@ -15,7 +15,7 @@ seen_words = set()
 with open(sys.argv[1]) as words_file:
     for word in words_file:
         # Check to make sure word is only alphanumeric characters
-        if re.findall(r'^\w+$', word):
+        if re.findall(r'^[a-zA-Z0-9]+$', word):
             seen_words.add(word.rstrip().lower())
 
 for word in seen_words:
