@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class DictionaryWordQuerySet(models.QuerySet):
     def search(self, superstring):
         """
@@ -10,11 +11,12 @@ class DictionaryWordQuerySet(models.QuerySet):
         the search is in order of longest word to shortest word.
         """ 
         # Note: This is sqlite3 dependent -- implementation may differ slightly depending on db engine
-        return self.extra(where=["'%s' LIKE '%%' || word || '%%'" % superstring,])
+        return self.extra(where=["'%s' LIKE '%%' || word || '%%'" % superstring])
     
     def order_by_word_length(self):
         """Returns dictionary words in order of their length, longest first.""" 
-        return self.extra(select={'length':'Length(word)'}).order_by('-length')
+        return self.extra(select={'length': 'Length(word)'}).order_by('-length')
+
 
 class DictionaryWord(models.Model):
     objects = DictionaryWordQuerySet.as_manager()
@@ -23,10 +25,12 @@ class DictionaryWord(models.Model):
     def __str__(self):
         return u'%s' % self.word
 
+
 class ShortURLManager(models.Manager):
     def create_short_url(self, original_url):
         # Search for a word that is not taken that is part of the original url
-        word = DictionaryWord.objects.search(original_url).filter(shorturl__isnull=True).extra(select={'length':'Length(word)'}).order_by('-length').first()
+        word = DictionaryWord.objects.search(original_url).filter(shorturl__isnull=True)\
+            .extra(select={'length': 'Length(word)'}).order_by('-length').first()
         if not word:
             # If we could not find a word, we look for a random, free word 
             word = DictionaryWord.objects.filter(shorturl__isnull=True).order_by('?').first()
@@ -35,6 +39,7 @@ class ShortURLManager(models.Manager):
             word = DictionaryWord.objects.order_by('-shorturl__time_created').last()
             word.shorturl.delete()
         return self.create(word=word, original_url=original_url, time_created=timezone.now())
+
 
 class ShortURL(models.Model):
     objects = ShortURLManager()

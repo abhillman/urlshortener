@@ -7,9 +7,11 @@ from django.http import HttpResponse
 from .forms import ShortURLForm
 from .models import ShortURL
 
+
 def resolve_short_url(request, short_url):
     short_url = get_object_or_404(ShortURL, word__word=short_url)
     return redirect(short_url.original_url)
+
 
 class CreateShortURL(View):
     def return_form(self, request, form):

@@ -4,4 +4,3 @@ from .models import ShortURL
 
 admin.site.register(DictionaryWord)
 admin.site.register(ShortURL)
-
