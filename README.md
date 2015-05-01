@@ -8,9 +8,11 @@ abalone will be found in a pre-loaded dictionary, and the created
 url will be http://<server-doman//abalone.
 
 Creation view:
+
 ![Screenshot 1](screenshot.png)
 
 Response view:
+
 ![Screenshot 2](screenshot2.png)
 
 ## Running Instructions
