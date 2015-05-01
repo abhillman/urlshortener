@@ -1,3 +1,0 @@
--   What do you think the purpose of this file is? What value does it add? What is it used for?
-
-It is a script to wrap a command that could be used to prevent a command from being run before a former execution of a command is completed. The wrapper will give up on attempting to execute the command if it has attempted to run the command however many times specified in the threshold without a success. It could be valuable, say, for batch transferring of data between servers--we may not want to only keep one connection open for the data transfer. Because a receiving server might be under load, we also do not want to keep stressing it by attempting to contact it, therefore we might implement a failure threshold to avoid putting load on the receiving system.
