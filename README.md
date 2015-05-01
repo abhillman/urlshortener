@@ -18,10 +18,13 @@ To run, create a virtual environment and install dependencies in
 urlshortener/requirements.txt (i.e. pip install -r requirements.txt). 
 sqlite3 must also be installed.
 
-Then, cd into urlshortener and run ./load_words to load words into
+Then, cd into urlshortener and run ./manage syncdb; ./load_words to load words into
 sqlite3.
 
 Finally, start the application by running ./manage runserver
 
 When you enter an example shortened URL, its shortened form will be returned.
 It will be resolved by typing http://localhost:8000/:short-url
+
+## Running Tests
+To run tests, cd into urlshortener and run ./manage test
